@@ -1,36 +1,44 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { popularProducts } from "../data";
+// import { popularProducts } from "../data";
 import Product from "./Product";
 import axios from 'axios';
+import toast from 'react-hot-toast'
 
 const Container = styled.div`
-    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 `;
 
+const MainContainer = styled.div`
+    padding: 20px;
+`;
+
+const Heading3 = styled.p`
+  font-size: 36px;
+  padding-bottom: 15px;
+`
+
 const Products = ({ cat, filters, sort }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const getProducts = async () => {
-    try {
-      const { data } = await axios.get( cat ? `http://localhost:5000/api/v1/products?category=${cat}` : "http://localhost:5000/api/v1/products" )
-      setProducts(data.products)
-      // console.log(res.data.products)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const { data } = await axios.get( cat ? `http://localhost:5000/api/v1/products?category=${cat}` : "http://localhost:5000/api/v1/products" )
+        setProducts(data.products)
+      } catch (err) {
+        console.log(err)
+      }
+    }
     getProducts();
   }, [cat]);
 
+    
   useEffect(() => {
-    cat && 
+    if(cat || filters || sort ) {
       setFilteredProducts(
         products.filter((item) => 
           Object.entries(filters).every(([key, value]) => 
@@ -38,7 +46,9 @@ const Products = ({ cat, filters, sort }) => {
           )
         )
       )
-  }, [products, cat, filters]);
+    }
+     
+  }, [products, cat, filters, sort]);
 
   useEffect(() => {
     if ((sort === "newest")) {
@@ -56,17 +66,31 @@ const Products = ({ cat, filters, sort }) => {
     }
   }, [sort])
 
-  return (
-    <Container>
-      {cat 
-      ? filteredProducts.map((item) => (
-        <Product item={item} key={item._id} />
-      )) 
-      : products.slice(0, 8).map((item) => (
-        <Product item={item} key={item._id} />
-      ))
+  const renderProductsConditionally = () => {
+    if (products || filteredProducts) {
+      if (cat || filters || sort) {
+        return (
+          filteredProducts.map((item) => (
+            <Product item={item} key={item._id} />
+          )) 
+        )
+      } else {
+        return (
+          products.slice(0, 8).map((item) => (
+            <Product item={item} key={item._id} />
+          ))
+        )
       }
-    </Container>
+    }
+  }
+
+  return (
+    <MainContainer>
+      <Heading3>Products</Heading3>
+      <Container>
+        { renderProductsConditionally() }
+      </Container>
+    </MainContainer>
   );
 };
 

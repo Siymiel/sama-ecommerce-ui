@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {mobile} from "../responsive";
 import { attemptLogin } from "../redux/apiCalls";
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom"
 
 const Container = styled.div`
   width: 100vw;
@@ -57,22 +58,22 @@ const Button = styled.button`
   }
 `;
 
-const Link = styled.a`
-  margin: 5px 0px;
-  font-size: 12px;
-  text-decoration: underline;
-  cursor: pointer;
-`;
+// const Link = styled.a`
+//   margin: 5px 0px;
+//   font-size: 12px;
+//   text-decoration: underline;
+//   cursor: pointer;
+// `;
 
-const Error = styled.div`
-  color: red;
-`;
+// const Error = styled.div`
+//   color: red;
+// `;
 
 const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const dispatch = useDispatch();
-  const { isFetching, error } = useSelector(state => state.user)
+  const { isFetching } = useSelector(state => state.user)
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -90,9 +91,9 @@ const Login = () => {
           onClick={handleLogin}
           disabled={isFetching}
           >LOGIN</Button>
-          {error && <Error>Something went wrong...</Error>}
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          {/* {error && <Error>Something went wrong...</Error>} */}
+          {/* <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link> */}
+          <Link to="/register">CREATE A NEW ACCOUNT</Link>
         </Form>
       </Wrapper>
     </Container>

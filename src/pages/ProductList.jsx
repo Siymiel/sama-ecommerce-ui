@@ -52,6 +52,10 @@ const ProductList = () => {
       [e.target.name]: value,
     });
   };
+
+  const clearFilter = () => {
+    setFilters({})
+  }
   
   return (
     <Container>
@@ -76,12 +80,13 @@ const ProductList = () => {
             <Option disabled defaultValue={"Size"}>
               Size
             </Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
+            <Option value="xs">XS</Option>
+            <Option value="s">S</Option>
+            <Option value="m">M</Option>
+            <Option value="l">L</Option>
+            <Option value="xl">XL</Option>
           </Select>
+          <p style={{"cursor": "pointer"}} onClick={clearFilter}>Clear filter</p>
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>

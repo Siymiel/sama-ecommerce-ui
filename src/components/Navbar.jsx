@@ -3,8 +3,9 @@ import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { attemptLogout } from "../redux/apiCalls";
 
 const Container = styled.div`
   height: 60px;
@@ -70,6 +71,16 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
   const cartQuantity = useSelector(state => state.cart.cartQuantity)
+  const user = useSelector(state => state.user.currentUser);
+  const username = user?.username
+
+  const dispatch = useDispatch();
+  // const navigate = useNavigate()
+
+  const handleLogout = () => {
+    attemptLogout(dispatch, {username})
+    // navigate("/login")
+  }
 
   return (
     <Container>
@@ -82,11 +93,21 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>LAMA.</Logo>
+          <Logo>SAMA SHOP.</Logo>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          {!user && ( 
+          <Link to='/register'>
+            <MenuItem>REGISTER</MenuItem>
+          </Link>
+          )}
+          {!user ? ( 
+          <Link to='/login'>
+            <MenuItem>SIGN IN</MenuItem>
+          </Link>) :
+          <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
+        }
+        <MenuItem>USERNAME: {username.charAt(0).toUpperCase() + username.slice(1)}</MenuItem>
           <Link to="/cart">
             <MenuItem>
               <Badge badgeContent={cartQuantity} color="primary">

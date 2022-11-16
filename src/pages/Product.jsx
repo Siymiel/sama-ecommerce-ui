@@ -5,11 +5,12 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { mobile } from "../responsive";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useMemo } from "react";
 import { publicRequest } from '../requestMethods';
 import { addProduct } from "../redux/cartFeature"; 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 
 const Container = styled.div``;
 
@@ -124,6 +125,8 @@ const Product = () => {
 
   const location = useLocation();
   const id = location.pathname.split('/')[2];
+  const user = useSelector(state => state.user.currentUser);
+  const navigate = useNavigate();
 
   const [product, setProduct] = useState(useMemo(() => [], []));
   const [productQuantity, setProductQuantity] = useState(1); //product-quantity
@@ -131,16 +134,19 @@ const Product = () => {
   const [size, setSize] = useState(null);
   const dispatch = useDispatch()
 
+  // console.log("PRO::", product)
+
   useEffect(() => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(`/products/${id}`);
-        setProduct(res.data.product)
+        setProduct(res?.data?.product)
       } catch (err) {
         console.log(err)
       };
     };
     getProduct();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleQuantity = (type) => {
@@ -151,9 +157,18 @@ const Product = () => {
     }
   };
 
+  
+
   const handleAddToCart = () => {
-    // Update cart
-    dispatch(addProduct({ ...product, productQuantity, color, size }));
+    if(user) {
+      if (product > 0) {
+        dispatch(addProduct({ ...product, productQuantity, color, size }));
+      }
+      toast.error("No product selected!")
+    } else {
+      navigate('/login')
+      toast.error('Sign in to continue.');
+    }
   }
 
   return (
@@ -192,10 +207,11 @@ const Product = () => {
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove onClick={() => handleQuantity("dec")} />
+              <Remove style={{"cursor": "pointer"}} onClick={() => handleQuantity("dec")} />
               <Amount>{productQuantity}</Amount>
-              <Add onClick={() => handleQuantity("inc")} />
+              <Add style={{"cursor": "pointer"}} onClick={() => handleQuantity("inc")} />
             </AmountContainer>
+            
             <Button onClick={handleAddToCart}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
