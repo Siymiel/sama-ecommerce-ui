@@ -1,14 +1,14 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://i.ibb.co/cXFnLLV/3.png",
+      img: "https://t3.ftcdn.net/jpg/02/63/72/58/240_F_263725800_Z5BkPmmCD20NaK7c5sQ1hFfqVBC44NkT.jpg",
       title: "SUMMER SALE",
       desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
       bg: "f5fafd",
     },
     {
       id: 2,
-      img: "https://i.ibb.co/cXFnLLV/1.png",
+      img: "https://www.moneycrashers.com/wp-content/uploads/2019/01/transition-summer-wardrobe-fall-clothing-fashion.jpg",
       title: "AUTUMN COLLECTION",
       desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
       bg: "fcf1ed",
@@ -32,7 +32,7 @@ export const sliderItems = [
       img: "https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
       title: "QUALITY LAPTOPS",
       desc: "GET YOUR WORTH! GET FLAT 5% OFF FOR NEW MACBOOKS.",
-      bg: "00f0f9",
+      bg: "00f0f0",
     },
   ];
 
