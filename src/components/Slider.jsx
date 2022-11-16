@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   position: relative;
   overflow: hidden;
@@ -55,11 +55,12 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
   height: 80%;
+  object-fit: cover;
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
-  padding: 50px;
+  padding: 40px;
 `;
 
 const Title = styled.h1`
@@ -84,9 +85,9 @@ const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
   const handleClick = (direction) => {
     if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 4);
     } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+      setSlideIndex(slideIndex < 4 ? slideIndex + 1 : 0);
     }
   };
 

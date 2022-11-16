@@ -1,7 +1,7 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://i.ibb.co/cXFnLLV/1.png",
+      img: "https://i.ibb.co/cXFnLLV/3.png",
       title: "SUMMER SALE",
       desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
       bg: "f5fafd",
@@ -15,10 +15,24 @@ export const sliderItems = [
     },
     {
       id: 3,
-      img: "https://i.ibb.co/cXFnLLV/1.png",
-      title: "LOUNGEWEAR LOVE",
-      desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-      bg: "fbf0f4",
+      img: "https://images.unsplash.com/photo-1631209121750-a9f656d28f46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
+      title: "HEALTHY FRUITS",
+      desc: "DON'T COMPROMISE ON HEALTH! GET FLAT 20% OFF FOR FRESH FRUITS.",
+      bg: "f0fff9",
+    },
+    {
+      id: 4,
+      img: "https://images.unsplash.com/photo-1550226891-ef816aed4a98?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      title: "COMFY FURNITURE",
+      desc: "DON'T COMPROMISE ON CONFORT! GET FLAT 15% OFF FOR QUALITY SEATS.",
+      bg: "f0fff9",
+    },
+    {
+      id: 5,
+      img: "https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      title: "QUALITY LAPTOPS",
+      desc: "GET YOUR WORTH! GET FLAT 5% OFF FOR NEW MACBOOKS.",
+      bg: "00f0f9",
     },
   ];
 
