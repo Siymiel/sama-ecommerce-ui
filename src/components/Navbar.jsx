@@ -73,6 +73,7 @@ const Navbar = () => {
   const cartQuantity = useSelector(state => state.cart.cartQuantity)
   const user = useSelector(state => state.user.currentUser);
   const username = user?.username
+  // const cart = useSelector(state => state.cart);
 
   const dispatch = useDispatch();
   // const navigate = useNavigate()
@@ -107,7 +108,7 @@ const Navbar = () => {
           </Link>) :
           <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
         }
-        <MenuItem>USERNAME: {username.charAt(0).toUpperCase() + username.slice(1)}</MenuItem>
+        <MenuItem>{username && "USERNAME:"} {username && username?.charAt(0).toUpperCase() + username.slice(1)}</MenuItem>
           <Link to="/cart">
             <MenuItem>
               <Badge badgeContent={cartQuantity} color="primary">
