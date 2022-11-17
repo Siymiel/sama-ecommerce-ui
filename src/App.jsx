@@ -10,6 +10,7 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import NotFound from './pages/NotFound'
 import Success from './pages/Success'
 import { useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
@@ -30,6 +31,7 @@ const App = () => {
         <Route exact path="/success" element={<Success />} />
         <Route exact path="/login" element={ user ? <Navigate replace to="/" /> : <Login /> } />
         <Route exact path="/register" element={ user ? <Navigate replace to="/" /> : <Register /> } />
+        <Route exact path="*" element={<NotFound />} />
       </Routes>
     </Router>
     </>

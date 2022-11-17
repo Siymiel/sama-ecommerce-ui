@@ -9,7 +9,9 @@ import StripeCheckout from 'react-stripe-checkout'
 // import Stripe from "stripe";
 import { useState, useEffect } from "react";
 import { userRequest } from '../requestMethods'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import { deleteProduct, addProductQty, decProductQty, removeProduct } from "../redux/cartFeature";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 
@@ -149,6 +151,11 @@ const SummaryItem = styled.div`
 
 const SummaryItemText = styled.span``;
 
+const Text = styled.span`
+  cursor: pointer;
+  color: brown;
+`;
+
 const SummaryItemPrice = styled.span``;
 
 const Button = styled.button`
@@ -165,6 +172,7 @@ const Cart = () => {
   // const stripe = Stripe(KEY);
   const navigate = useNavigate()
   const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch()
   const [stripeToken, setStripeToken] = useState(null)
 
   const onToken = (token) => {
@@ -185,6 +193,27 @@ const Cart = () => {
     }
     stripeToken && cart.total >= 1 && makeRequest();
   }, [stripeToken, cart.total, navigate])
+
+  const handleQuantity = (id, type) => {
+    if (type === "asc") {
+      dispatch(addProductQty(id))
+    } else {
+      dispatch(decProductQty(id))
+    }
+  }
+
+  useEffect(() => {  
+    handleQuantity()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleRemove = (id) => {
+    dispatch(deleteProduct(id))
+  }
+
+  const handleClearCart = () => {
+    dispatch(removeProduct())
+  }
 
 
   //  const makePayment =async () => {
@@ -214,12 +243,14 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <Link to="/products">
+            <TopButton>CONTINUE SHOPPING</TopButton>
+          </Link>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
+            <TopText>Shopping Bag({cart.cartQuantity})</TopText>
+            {/* <TopText>Your Wishlist (0)</TopText> */}
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <TopButton type="filled" onClick={handleClearCart}>CLEAR CART</TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -243,11 +274,17 @@ const Cart = () => {
                   </ProductDetail>
                   <PriceDetail>
                     <ProductAmountContainer>
-                      <Add />
+                      {
+                      product.productQuantity > 1 ?
+                      <Remove onClick={() => handleQuantity(product._id, "desc")}/>
+                      :
+                      ""
+                      }
                       <ProductAmount>{product.productQuantity}</ProductAmount>
-                      <Remove />
+                      <Add onClick={() => handleQuantity(product._id, "asc")}/>
                     </ProductAmountContainer>
                     <ProductPrice>$ {product.price * product.productQuantity}</ProductPrice>
+                  <Text onClick={() => handleRemove(product._id)}>Remove</Text>
                   </PriceDetail>
                 </Product>
                 <Hr />

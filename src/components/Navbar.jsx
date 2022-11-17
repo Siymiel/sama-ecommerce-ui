@@ -6,6 +6,7 @@ import { mobile } from "../responsive";
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { attemptLogout } from "../redux/apiCalls";
+import { removeProduct } from '../redux/cartFeature'
 
 const Container = styled.div`
   height: 60px;
@@ -52,6 +53,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
   font-weight: bold;
+  color: black;
   ${mobile({ fontSize: "24px" })}
 `;
 const Right = styled.div`
@@ -76,11 +78,10 @@ const Navbar = () => {
   // const cart = useSelector(state => state.cart);
 
   const dispatch = useDispatch();
-  // const navigate = useNavigate()
 
   const handleLogout = () => {
     attemptLogout(dispatch, {username})
-    // navigate("/login")
+    dispatch(removeProduct())
   }
 
   return (
@@ -94,16 +95,18 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>SAMA SHOP.</Logo>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <Logo>SAMA SHOP.</Logo>
+          </Link>
         </Center>
         <Right>
           {!user && ( 
-          <Link to='/register'>
+          <Link to='/register' style={{ textDecoration: 'none' }}>
             <MenuItem>REGISTER</MenuItem>
           </Link>
           )}
           {!user ? ( 
-          <Link to='/login'>
+          <Link to='/login' style={{ textDecoration: 'none' }}>
             <MenuItem>SIGN IN</MenuItem>
           </Link>) :
           <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>

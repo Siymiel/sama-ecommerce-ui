@@ -1,21 +1,21 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://t3.ftcdn.net/jpg/02/63/72/58/240_F_263725800_Z5BkPmmCD20NaK7c5sQ1hFfqVBC44NkT.jpg",
+      img: "https://images.pexels.com/photos/9968493/pexels-photo-9968493.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
       title: "SUMMER SALE",
       desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
       bg: "f5fafd",
     },
     {
       id: 2,
-      img: "https://www.moneycrashers.com/wp-content/uploads/2019/01/transition-summer-wardrobe-fall-clothing-fashion.jpg",
+      img: "https://images.pexels.com/photos/6146934/pexels-photo-6146934.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       title: "AUTUMN COLLECTION",
       desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
       bg: "fcf1ed",
     },
     {
       id: 3,
-      img: "https://images.unsplash.com/photo-1631209121750-a9f656d28f46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
+      img: "https://images.pexels.com/photos/760281/pexels-photo-760281.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       title: "HEALTHY FRUITS",
       desc: "DON'T COMPROMISE ON HEALTH! GET FLAT 20% OFF FOR FRESH FRUITS.",
       bg: "f0fff9",
@@ -29,10 +29,10 @@ export const sliderItems = [
     },
     {
       id: 5,
-      img: "https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      img: "https://images.pexels.com/photos/2506947/pexels-photo-2506947.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       title: "QUALITY LAPTOPS",
       desc: "GET YOUR WORTH! GET FLAT 5% OFF FOR NEW MACBOOKS.",
-      bg: "00f0f0",
+      bg: "14d5a9",
     },
   ];
 

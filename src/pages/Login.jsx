@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import {mobile} from "../responsive";
 import { attemptLogin } from "../redux/apiCalls";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom"
 
 const Container = styled.div`
@@ -44,7 +44,7 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-const Button = styled.button`
+const LoginButton = styled.button`
   width: 40%;
   border: none;
   padding: 15px 20px;
@@ -73,9 +73,10 @@ const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const dispatch = useDispatch();
-  const { isFetching } = useSelector(state => state.user)
+  // const { isFetching } = useSelector(state => state.user)
 
   const handleLogin = (e) => {
+    console.log("Error")
     e.preventDefault();
     attemptLogin(dispatch, { username, password });
   }
@@ -87,10 +88,9 @@ const Login = () => {
         <Form>
           <Input placeholder="username" name="username" onChange={(e) => setUsername(e.target.value)}/>
           <Input placeholder="password" name="password" type="password" onChange={(e) => setPassword(e.target.value)}/>
-          <Button 
+          <LoginButton 
           onClick={handleLogin}
-          disabled={isFetching}
-          >LOGIN</Button>
+          >LOGIN</LoginButton>
           {/* {error && <Error>Something went wrong...</Error>} */}
           {/* <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link> */}
           <Link to="/register">CREATE A NEW ACCOUNT</Link>

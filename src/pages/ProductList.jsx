@@ -5,7 +5,7 @@ import Products from "../components/Products";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Container = styled.div``;
@@ -38,8 +38,16 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 
+const BackButton = styled.div`
+  padding-left: 28px;
+  padding-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+`;
+
 const ProductList = () => {
   const location = useLocation();
+  const navigate = useNavigate()
   const cat = location.pathname.split("/")[2];
 
   const [filters, setFilters] = useState({});
@@ -61,7 +69,8 @@ const ProductList = () => {
     <Container>
       <Navbar />
       <Announcement />
-      <Title>{cat}</Title>
+      <BackButton onClick={() => navigate(-1)}>Go Back</BackButton>
+      <Title>{cat} jcxcbx</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>

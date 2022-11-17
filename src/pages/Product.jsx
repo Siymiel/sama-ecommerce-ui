@@ -121,6 +121,13 @@ const Button = styled.button`
   }
 `;
 
+const BackButton = styled.div`
+  padding-left: 28px;
+  padding-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+`;
+
 const Product = () => {
 
   const location = useLocation();
@@ -149,6 +156,19 @@ const Product = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  const productsInCart = useSelector(state => state.cart.products)
+  const cartProds = Object.values(productsInCart)
+  const checkProduct =  () => {
+    const boolean = cartProds.map(prod => {
+      if(prod._id === id) {
+        return true
+      } else {
+        return false
+      }
+    })
+    return boolean[0]
+}
+
   const handleQuantity = (type) => {
     if (type === "dec") {
       productQuantity > 1  && setProductQuantity(productQuantity - 1);
@@ -157,14 +177,14 @@ const Product = () => {
     }
   };
 
-  
-
   const handleAddToCart = () => {
     if(user) {
-      if (product > 0) {
+      if (product) {
         dispatch(addProduct({ ...product, productQuantity, color, size }));
-      }
-      toast.error("No product selected!")
+        toast.success("Product added to cart!")
+      } else {
+        toast.error("Error selecting product!")
+      } 
     } else {
       navigate('/login')
       toast.error('Sign in to continue.');
@@ -175,6 +195,7 @@ const Product = () => {
     <Container>
       <Navbar />
       <Announcement />
+      <BackButton onClick={() => navigate(-1)}>Go Back</BackButton>
       <Wrapper>
         <ImgContainer>
           <Image src={product?.img} />
@@ -211,8 +232,11 @@ const Product = () => {
               <Amount>{productQuantity}</Amount>
               <Add style={{"cursor": "pointer"}} onClick={() => handleQuantity("inc")} />
             </AmountContainer>
-            
-            <Button onClick={handleAddToCart}>ADD TO CART</Button>
+            {
+              checkProduct() === true ? 
+              <Button onClick={() => toast.error("Product already added to cart")}>ADD TO CART</Button> :
+              <Button  onClick={handleAddToCart}>ADD TO CART</Button>
+            }
           </AddContainer>
         </InfoContainer>
       </Wrapper>
