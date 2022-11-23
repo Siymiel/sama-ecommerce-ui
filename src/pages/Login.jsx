@@ -76,7 +76,6 @@ const Login = () => {
   // const { isFetching } = useSelector(state => state.user)
 
   const handleLogin = (e) => {
-    console.log("Error")
     e.preventDefault();
     attemptLogin(dispatch, { username, password });
   }

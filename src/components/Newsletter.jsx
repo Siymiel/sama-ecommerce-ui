@@ -1,6 +1,9 @@
 import { Send } from "@material-ui/icons";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import axios from "axios"
+import { useState } from 'react'
+import toast from 'react-hot-toast';
 
 const Container = styled.div`
   height: 60vh;
@@ -44,19 +47,48 @@ const Button = styled.button`
   border: none;
   background-color: teal;
   color: white;
+  cursor: pointer;
 `;
 
 const Newsletter = () => {
+
+  const [email, setEmails] = useState('')
+
+  const handleChange = (e) => {
+    setEmails(e.target.value)
+    console.log(e.target.value)
+  } 
+ 
+  const handleMailSend = async (e) => {
+    e.preventDefault();
+    const values = {
+      emails: email
+    }
+    const convertedmails = JSON.stringify(values)
+    try {
+      await axios.post('http://localhost:5000/api/v1/sendmail', convertedmails)
+      toast.success('You have successfully subscribed to Sama Shop newsletter. Talk soon!')
+    } catch (err) {
+        console.log(err.message)
+    }
+  }
+
   return (
     <Container>
       <Title>Newsletter</Title>
       <Desc>Get timely updates from your favorite products.</Desc>
-      <InputContainer>
-        <Input placeholder="Your email" />
-        <Button>
-          <Send />
-        </Button>
-      </InputContainer>
+        <form>
+        <InputContainer>
+            <Input 
+            placeholder="Your email" 
+            name="emails" 
+            onChange={handleChange}
+            />
+            <Button type="submit" onClick={handleMailSend}>
+              <Send/>
+            </Button>
+        </InputContainer>
+        </form>
     </Container>
   );
 };
