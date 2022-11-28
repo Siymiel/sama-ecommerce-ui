@@ -70,7 +70,7 @@ const ProductList = () => {
       <Navbar />
       <Announcement />
       <BackButton onClick={() => navigate(-1)}>Go Back</BackButton>
-      <Title>{cat} jcxcbx</Title>
+      <Title>{cat ? cat : "All Products"}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>

@@ -131,7 +131,7 @@ const BackButton = styled.div`
 const Product = () => {
 
   const location = useLocation();
-  const id = location.pathname.split('/')[2];
+  const slug = location.pathname.split('/')[2];
   const user = useSelector(state => state.user.currentUser);
   const navigate = useNavigate();
 
@@ -146,7 +146,7 @@ const Product = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get(`/products/${id}`);
+        const res = await publicRequest.get(`/products/${slug}`);
         setProduct(res?.data?.product)
       } catch (err) {
         console.log(err)
@@ -154,13 +154,13 @@ const Product = () => {
     };
     getProduct();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [slug]);
 
   const productsInCart = useSelector(state => state.cart.products)
   const cartProds = Object.values(productsInCart)
   const checkProduct =  () => {
     const boolean = cartProds.map(prod => {
-      if(prod._id === id) {
+      if(prod.slug === slug) {
         return true
       } else {
         return false

@@ -3,7 +3,6 @@ import styled from "styled-components";
 // import { popularProducts } from "../data";
 import Product from "./Product";
 import axios from 'axios';
-import toast from 'react-hot-toast'
 
 const Container = styled.div`
     display: flex;
@@ -71,13 +70,13 @@ const Products = ({ cat, filters, sort }) => {
       if (cat || filters || sort) {
         return (
           filteredProducts.map((item) => (
-            <Product item={item} key={item._id} />
+            <Product item={item} key={item.slug} />
           )) 
         )
       } else {
         return (
           products.slice(0, 8).map((item) => (
-            <Product item={item} key={item._id} />
+            <Product item={item} key={item.slug} />
           ))
         )
       }

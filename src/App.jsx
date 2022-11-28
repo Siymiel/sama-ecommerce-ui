@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <>
-    <Toaster/>
+    <Toaster limit={1}/>
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />

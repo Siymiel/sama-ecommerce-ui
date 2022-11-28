@@ -50,26 +50,30 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const Text = styled.p`
+  padding: 5px;
+  font-size: 10px;
+`;
+
 const Newsletter = () => {
 
   const [email, setEmails] = useState('')
-
-  const handleChange = (e) => {
-    setEmails(e.target.value)
-    console.log(e.target.value)
-  } 
+  const [loading, setLoading] = useState(false)
  
   const handleMailSend = async (e) => {
     e.preventDefault();
-    const values = {
-      emails: email
+    if (!email) {
+      return toast.error('Please fill email to proceed')
     }
-    const convertedmails = JSON.stringify(values)
+
     try {
-      await axios.post('http://localhost:5000/api/v1/sendmail', convertedmails)
-      toast.success('You have successfully subscribed to Sama Shop newsletter. Talk soon!')
+      setLoading(true)
+      const { data } = await axios.post('http://localhost:5000/api/email', { email })
+      toast.success(data.message)
+      setLoading(false)
     } catch (err) {
-        console.log(err.message)
+      setLoading(false)
+      toast.error(err.response && err.response.data.message ? err.response.data.message : err.message)
     }
   }
 
@@ -77,12 +81,13 @@ const Newsletter = () => {
     <Container>
       <Title>Newsletter</Title>
       <Desc>Get timely updates from your favorite products.</Desc>
+        <Text>{loading ? "Processing..." : ''}</Text>
         <form>
         <InputContainer>
             <Input 
             placeholder="Your email" 
-            name="emails" 
-            onChange={handleChange}
+            name="email" 
+            onChange={(e) => setEmails(e.target.value)}
             />
             <Button type="submit" onClick={handleMailSend}>
               <Send/>
