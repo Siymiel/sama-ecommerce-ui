@@ -256,7 +256,7 @@ const Cart = () => {
           <Info>
             {cart.products?.map(product => (
               <>
-                <Product key={product._id}>
+                <Product key={product.id}>
                   <ProductDetail>
                     <Image src={product.img} />
                     <Details>
@@ -264,7 +264,7 @@ const Cart = () => {
                         <b>Product:</b> {product.title}
                       </ProductName>
                       <ProductId>
-                        <b>ID:</b> {product._id}
+                        <b>ID:</b> {product.id}
                       </ProductId>
                       <ProductColor color={product.color} />
                       <ProductSize>
