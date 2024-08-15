@@ -80,7 +80,7 @@ const Product = ({ item }) => {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <Link to={`/product/${item.slug}`}>
+          <Link to={`/product/${item.id}`}>
             <SearchOutlined />
           </Link>
         </Icon>

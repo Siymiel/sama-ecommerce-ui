@@ -11,6 +11,7 @@ import { publicRequest } from '../requestMethods';
 import { addProduct } from "../redux/cartFeature"; 
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
+import { popularProducts } from '../data'
 
 const Container = styled.div``;
 
@@ -135,32 +136,38 @@ const Product = () => {
   const user = useSelector(state => state.user.currentUser);
   const navigate = useNavigate();
 
-  const [product, setProduct] = useState(useMemo(() => [], []));
+  const [product, setProduct] = useState({});
+
   const [productQuantity, setProductQuantity] = useState(1); //product-quantity
   const [color, setColor] = useState(null);
   const [size, setSize] = useState(null);
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    const p = popularProducts.find(item => item.id == slug)
+    setProduct(p)
+  }, [])
+
   // console.log("PRO::", product)
 
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const res = await publicRequest.get(`/products/${slug}`);
-        setProduct(res?.data?.product)
-      } catch (err) {
-        console.log(err)
-      };
-    };
-    getProduct();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     try {
+  //       const res = await publicRequest.get(`/products/${slug}`);
+  //       setProduct(res?.data?.product)
+  //     } catch (err) {
+  //       console.log(err)
+  //     };
+  //   };
+  //   getProduct();
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [slug]);
 
   const productsInCart = useSelector(state => state.cart.products)
   const cartProds = Object.values(productsInCart)
   const checkProduct =  () => {
     const boolean = cartProds.map(prod => {
-      if(prod.slug === slug) {
+      if(prod.id === slug) {
         return true
       } else {
         return false

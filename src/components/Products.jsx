@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-// import { popularProducts } from "../data";
+import { popularProducts } from "../data";
 import Product from "./Product";
 import axios from 'axios';
 
@@ -20,26 +20,40 @@ const Heading3 = styled.p`
 `
 
 const Products = ({ cat, filters, sort }) => {
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState(popularProducts);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const { data } = await axios.get( cat ? `http://localhost:5000/api/v1/products?category=${cat}` : "http://localhost:5000/api/v1/products" )
-        setProducts(data.products)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    getProducts();
-  }, [cat]);
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     try {
+  //       const { data } = await axios.get( cat ? `http://localhost:5000/api/v1/products?category=${cat}` : "http://localhost:5000/api/v1/products" )
+  //       setProducts(data.products)
+  //     } catch (err) {
+  //       console.log(err)
+  //     }
+  //   }
+  //   getProducts();
+  // }, [cat]);
+
+    
+  // useEffect(() => {
+  //   if(cat || filters || sort ) {
+  //     setFilteredProducts(
+  //       products.filter((item) => 
+  //         Object.entries(filters).every(([key, value]) => 
+  //           item[key].includes(value)
+  //         )
+  //       )
+  //     )
+  //   }
+     
+  // }, [products, cat, filters, sort]);
 
     
   useEffect(() => {
     if(cat || filters || sort ) {
       setFilteredProducts(
-        products.filter((item) => 
+        popularProducts.filter((item) => 
           Object.entries(filters).every(([key, value]) => 
             item[key].includes(value)
           )
@@ -47,7 +61,7 @@ const Products = ({ cat, filters, sort }) => {
       )
     }
      
-  }, [products, cat, filters, sort]);
+  }, [popularProducts, cat, filters, sort]);
 
   useEffect(() => {
     if ((sort === "newest")) {
@@ -66,17 +80,17 @@ const Products = ({ cat, filters, sort }) => {
   }, [sort])
 
   const renderProductsConditionally = () => {
-    if (products || filteredProducts) {
+    if (popularProducts || filteredProducts) {
       if (cat || filters || sort) {
         return (
           filteredProducts.map((item) => (
-            <Product item={item} key={item.slug} />
+            <Product item={item} key={item.id} />
           )) 
         )
       } else {
         return (
-          products.slice(0, 8).map((item) => (
-            <Product item={item} key={item.slug} />
+          popularProducts.slice(0, 8).map((item) => (
+            <Product item={item} key={item.id} />
           ))
         )
       }
