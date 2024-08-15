@@ -75,7 +75,7 @@ const ProductList = () => {
         <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select name="color" onChange={handleFilters}>
-            <Option disabled defaultValue={"Color"}>
+            <Option disabled defaultValue={"black"}>
               Color
             </Option>
             <Option>white</Option>
@@ -84,6 +84,7 @@ const ProductList = () => {
             <Option>blue</Option>
             <Option>yellow</Option>
             <Option>green</Option>
+            <Option>magenta</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option disabled defaultValue={"Size"}>
