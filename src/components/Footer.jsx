@@ -127,10 +127,10 @@ const Footer = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{marginRight:"10px"}}/> 622 Equity Path , Kasarani Nairobi 98336
+          <Room style={{marginRight:"10px"}}/> 1234 Tech Lane, Suite 567, Innovation City, CA 94016
         </ContactItem>
         <ContactItem>
-          <Phone style={{marginRight:"10px"}}/> +254 797 741 435
+          <Phone style={{marginRight:"10px"}}/> +1 (555) 123-4567
         </ContactItem>
         <ContactItem>
           <MailOutline style={{marginRight:"10px"}} /> contact@sama.dev
