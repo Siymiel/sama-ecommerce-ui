@@ -254,7 +254,7 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            {cart.products?.map(product => (
+            {cart?.products?.map(product => (
               <>
                 <Product key={product.id}>
                   <ProductDetail>
