@@ -144,7 +144,7 @@ const Product = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const p = popularProducts.find(item => item.id === slug)
+    const p = popularProducts.find(item => item.id == slug)
     setProduct(p)
   }, [slug])
 
