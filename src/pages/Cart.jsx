@@ -266,7 +266,7 @@ const Cart = () => {
                       <ProductId>
                         <b>ID:</b> {product.id}#SAMASHOP
                       </ProductId>
-                      <ProductColor color={product?.color[0]} />
+                      {/* <ProductColor color={product?.color[0]} /> */}
                       <p>{product.desc.split(' ').slice(0, 50).join(' ')}</p>
                       <ProductSize>
                         <b>Size:</b> {product.size}
