@@ -66,6 +66,7 @@ export const sliderItems = [
       color: ['red', 'yellow', 'green', 'black'],
       size: ['S', 'M', 'L', 'XL'],
       img:"https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
+      productQuantity: 240
     },
     {
       id:2,
@@ -75,6 +76,7 @@ export const sliderItems = [
       color: ['pink', 'yellow', 'magenta', 'black'],
       size: ['S', 'M', 'L', 'XL'],
       img:"http://cdn.shopify.com/s/files/1/0081/1260/3217/products/2176020-Natural1637978660.png?v=1639019567",
+      productQuantity: 120
     },
     {
       id:3,
@@ -84,6 +86,7 @@ export const sliderItems = [
       color: ['pink', 'yellow', 'magenta', 'black'],
       size: ['S', 'M', 'L', 'XL'],
       img:"https://www.prada.com/content/dam/pradanux_products/U/UCS/UCS319/1YOTF010O/UCS319_1YOT_F010O_S_182_SLF.png",
+      productQuantity: 30
     },
     {
       id:4,
@@ -93,6 +96,7 @@ export const sliderItems = [
       color: ['gray', 'brown', 'black'],
       size: ['S', 'M', 'L', 'XL'],
       img:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2F0Y2h8ZW58MHx8MHx8fDA%3D",
+      productQuantity: 56
     },
     {
       id:5,
@@ -102,6 +106,7 @@ export const sliderItems = [
       color: ['pink', 'orange', 'cyan', 'skyblue'],
       size: ['S', 'M', 'L', 'XL'],
       img:"https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png",
+      productQuantity: 12
     },
     {
       id:6,
@@ -111,6 +116,7 @@ export const sliderItems = [
       color: ['pink', 'yellow', 'grey', 'black'],
       size: ['S', 'M', 'L', 'XL'],
       img:"https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png",
+      productQuantity: 23
     },
     {
       id:7,
@@ -120,6 +126,7 @@ export const sliderItems = [
       color: ['pink', 'yellow', 'magenta', 'black'],
       size: ['S', 'M', 'L', 'XL'],
       img:"https://amerikaantje.be/wp-content/uploads/2021/06/2217-arrow-jacket-forest.jpg",
+      productQuantity: 24
     },
     {
       id:8,
@@ -129,5 +136,6 @@ export const sliderItems = [
       color: ['pink', 'yellow', 'magenta', 'black'],
       size: ['S', 'M', 'L', 'XL'],
       img:"https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
+      productQuantity: 30
     },
   ]
