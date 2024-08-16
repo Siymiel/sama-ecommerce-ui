@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
 import Product from "./Product";
-import axios from "axios";
+import { ProductContext } from "../utils/contexts/productProvider";
 
 const Container = styled.div`
   display: flex;
@@ -20,47 +20,7 @@ const Heading3 = styled.p`
 `;
 
 const Products = ({ cat, filters, sort }) => {
-  console.log("🚀 ~ Products ~ filters:", filters);
-  // const [products, setProducts] = useState(popularProducts);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  // useEffect(() => {
-  //   const getProducts = async () => {
-  //     try {
-  //       const { data } = await axios.get( cat ? `http://localhost:5000/api/v1/products?category=${cat}` : "http://localhost:5000/api/v1/products" )
-  //       setProducts(data.products)
-  //     } catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-  //   getProducts();
-  // }, [cat]);
-
-  // useEffect(() => {
-  //   if(cat || filters || sort ) {
-  //     setFilteredProducts(
-  //       products.filter((item) =>
-  //         Object.entries(filters).every(([key, value]) =>
-  //           item[key].includes(value)
-  //         )
-  //       )
-  //     )
-  //   }
-
-  // }, [products, cat, filters, sort]);
-
-  // useEffect(() => {
-  //   if(cat || filters || sort ) {
-  //     setFilteredProducts(
-  //       popularProducts.filter((item) =>
-  //         Object.entries(filters).every(([key, value]) =>
-  //           item[key].includes(value)
-  //         )
-  //       )
-  //     )
-  //   }
-
-  // }, [popularProducts, cat, filters, sort]);
+  const {filteredProducts, setFilteredProducts } = useContext(ProductContext)
 
   useEffect(() => {
     if (cat || filters || sort) {
@@ -84,7 +44,7 @@ const Products = ({ cat, filters, sort }) => {
         )
       );
     }
-  }, [popularProducts, cat, filters, sort]);
+  }, [cat, filters, sort, setFilteredProducts]);
 
   useEffect(() => {
     if (sort === "newest") {
@@ -100,7 +60,7 @@ const Products = ({ cat, filters, sort }) => {
         [...prev].sort((a, b) => b.price - a.price)
       );
     }
-  }, [sort]);
+  }, [sort, setFilteredProducts]);
 
   const renderProductsConditionally = () => {
     if (popularProducts || filteredProducts) {
@@ -140,3 +100,43 @@ const Products = ({ cat, filters, sort }) => {
 };
 
 export default Products;
+
+
+
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     try {
+  //       const { data } = await axios.get( cat ? `http://localhost:5000/api/v1/products?category=${cat}` : "http://localhost:5000/api/v1/products" )
+  //       setProducts(data.products)
+  //     } catch (err) {
+  //       console.log(err)
+  //     }
+  //   }
+  //   getProducts();
+  // }, [cat]);
+
+  // useEffect(() => {
+  //   if(cat || filters || sort ) {
+  //     setFilteredProducts(
+  //       products.filter((item) =>
+  //         Object.entries(filters).every(([key, value]) =>
+  //           item[key].includes(value)
+  //         )
+  //       )
+  //     )
+  //   }
+
+  // }, [products, cat, filters, sort]);
+
+  // useEffect(() => {
+  //   if(cat || filters || sort ) {
+  //     setFilteredProducts(
+  //       popularProducts.filter((item) =>
+  //         Object.entries(filters).every(([key, value]) =>
+  //           item[key].includes(value)
+  //         )
+  //       )
+  //     )
+  //   }
+
+  // }, [popularProducts, cat, filters, sort]);

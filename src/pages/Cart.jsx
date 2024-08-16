@@ -264,9 +264,10 @@ const Cart = () => {
                         <b>Product:</b> {product.title}
                       </ProductName>
                       <ProductId>
-                        <b>ID:</b> {product.id}
+                        <b>ID:</b> {product.id}#SAMASHOP
                       </ProductId>
-                      <ProductColor color={product.color} />
+                      <ProductColor color={product.color[0]} />
+                      <p>{product.desc.split(' ').slice(0, 50).join(' ')}</p>
                       <ProductSize>
                         <b>Size:</b> {product.size}
                       </ProductSize>
@@ -276,15 +277,15 @@ const Cart = () => {
                     <ProductAmountContainer>
                       {
                       product.productQuantity > 1 ?
-                      <Remove onClick={() => handleQuantity(product._id, "desc")}/>
+                      <Remove onClick={() => handleQuantity(product.id, "desc")}/>
                       :
                       ""
                       }
                       <ProductAmount>{product.productQuantity}</ProductAmount>
-                      <Add onClick={() => handleQuantity(product._id, "asc")}/>
+                      <Add onClick={() => handleQuantity(product.id, "asc")}/>
                     </ProductAmountContainer>
                     <ProductPrice>$ {product.price * product.productQuantity}</ProductPrice>
-                  <Text onClick={() => handleRemove(product._id)}>Remove</Text>
+                  <Text onClick={() => handleRemove(product.id)}>Remove</Text>
                   </PriceDetail>
                 </Product>
                 <Hr />

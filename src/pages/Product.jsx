@@ -6,8 +6,8 @@ import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { mobile } from "../responsive";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState, useMemo } from "react";
-import { publicRequest } from '../requestMethods';
+import { useEffect, useState } from "react";
+// import { publicRequest } from '../requestMethods';
 import { addProduct } from "../redux/cartFeature"; 
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
@@ -144,9 +144,9 @@ const Product = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const p = popularProducts.find(item => item.id == slug)
+    const p = popularProducts.find(item => item.id === slug)
     setProduct(p)
-  }, [])
+  }, [slug])
 
   // console.log("PRO::", product)
 

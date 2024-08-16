@@ -4,7 +4,12 @@ import {
   ShoppingCartOutlined,
 } from "@material-ui/icons";
 import styled from "styled-components";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct } from '../redux/cartFeature';
+import toast from 'react-hot-toast';
+import { popularProducts } from "../data";
+import { useState, useEffect } from "react";
 
 const Info = styled.div`
   opacity: 0;
@@ -70,14 +75,50 @@ const Icon = styled.div`
   }
 `;
 
+
 const Product = ({ item }) => {
+  const user = useSelector(state => state.user.currentUser);
+  const [product, setProduct] = useState(null);
+  const [productQuantity, setProductQuantity] = useState(1);
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleAddToCart = (productId) => {
+    const selectedProduct = popularProducts.find(product => product.id === productId);
+    
+    if (selectedProduct) {
+      setProduct(selectedProduct);
+    }
+  };
+  
+  useEffect(() => {
+    if (product !== null) {
+      if (user) {
+        dispatch(addProduct({ ...product, productQuantity }));
+        toast.success("Product added to cart!");
+      } else {
+        navigate('/login');
+        toast.error('Sign in to continue.');
+      }
+    }
+  }, [product]);
+  
+  const addToCart = (productId) => {
+    handleAddToCart(productId);
+  };
+  
+  const handleAddToFavourite = () => {
+    toast.success('Product added to favourites!')
+  }
+
   return (
     <Container>
       <Circle />
       <Image src={item.img} />
       <Info>
         <Icon>
-          <ShoppingCartOutlined />
+          <ShoppingCartOutlined onClick={() => addToCart(item.id)} />
         </Icon>
         <Icon>
           <Link to={`/product/${item.id}`}>
@@ -85,7 +126,7 @@ const Product = ({ item }) => {
           </Link>
         </Icon>
         <Icon>
-          <FavoriteBorderOutlined />
+          <FavoriteBorderOutlined onClick={handleAddToFavourite} />
         </Icon>
       </Info>
     </Container>
